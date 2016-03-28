@@ -15,12 +15,10 @@ public class GravityGenerator : MonoBehaviour {
 	
 	}
 
-	public void Attract(Transform otherTrans, Rigidbody otherBody) {
-		Vector3 gravityUp = (otherTrans.position - trans.position).normalized;
-		Vector3 bodyUp = otherTrans.up;
+	public void Attract(Rigidbody otherBody) {
+		Vector3 gravityUp = (otherBody.transform.position - trans.position);
+		Vector3 bodyUp = otherBody.transform.up;
 
 		otherBody.AddForce(gravityUp * gravity);
-		//Quaternion rot = Quaternion.FromToRotation(bodyUp, gravityUp) * otherTrans.rotation;
-		//otherTrans.rotation = Quaternion.Slerp(otherTrans.rotation, rot, 50 * Time.deltaTime);
 	}
 }
