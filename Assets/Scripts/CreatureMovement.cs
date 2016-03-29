@@ -6,6 +6,10 @@ public class CreatureMovement : GravityBody {
 		Init();
 	}
 
+	void Start() {
+		trans.localPosition = Random.insideUnitSphere * 0.7f;
+	}
+
 	void Update() {
 		UpdateGravityPhisics();
 

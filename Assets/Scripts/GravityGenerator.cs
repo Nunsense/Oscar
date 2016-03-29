@@ -11,14 +11,9 @@ public class GravityGenerator : MonoBehaviour {
 		trans = transform;
 	}
 
-	void Start() {
-	
-	}
+	public void Attract(Rigidbody body) {
+		Vector3 gravityUp = (body.transform.position - trans.position);
 
-	public void Attract(Rigidbody otherBody) {
-		Vector3 gravityUp = (otherBody.transform.position - trans.position);
-		Vector3 bodyUp = otherBody.transform.up;
-
-		otherBody.AddForce(gravityUp * gravity);
+		body.AddForce(gravityUp * gravity * Time.deltaTime);
 	}
 }

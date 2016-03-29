@@ -6,7 +6,7 @@ public class PlayerMovement : GravityBody {
 	private SwipeControl swipeControl;
 
 	public Transform ball;
-	public PlanetMovement ballMovement;
+	public BallMovement ballMovement;
 
 	private Vector3 move;
 
@@ -41,7 +41,7 @@ public class PlayerMovement : GravityBody {
 	}
 
 
-	private void FixedUpdate() {
+	void FixedUpdate() {
 		if (isMoving)
 			ballMovement.Move(move);
 	}

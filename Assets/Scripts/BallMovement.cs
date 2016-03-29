@@ -1,10 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlanetMovement : GravityBody {
+public class BallMovement : GravityBody {
 	[SerializeField] private float m_MovePower = 5;
 	[SerializeField] private bool m_UseTorque = true;
 	[SerializeField] private float m_MaxAngularVelocity = 25;
+
+	[SerializeField] private float m_BreakPower = 0.8f;
 
 	void Awake() {
 		Init();
@@ -14,13 +16,15 @@ public class PlanetMovement : GravityBody {
 		GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
 	}
 
-	void Update() {
+	void FixedUpdate() {
 		UpdateGravityPhisics();
 	}
 
 	public void Move(Vector3 moveDirection) {
 		Debug.DrawRay(transform.position, moveDirection.normalized * 5f, Color.green);
+		body.angularVelocity *= m_BreakPower;
 		body.angularVelocity += moveDirection * m_MovePower;
+//		body.AddRelativeTorque(moveDirection * m_MovePower);
 	}
 
 	public Vector3 ForceToTorque(Vector3 force, Vector3 position, ForceMode forceMode = ForceMode.Force) {

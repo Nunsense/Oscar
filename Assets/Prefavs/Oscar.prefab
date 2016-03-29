@@ -32,7 +32,7 @@ GameObject:
   - 54: {fileID: 5415464}
   m_Layer: 0
   m_Name: Oscar
-  m_TagString: Untagged
+  m_TagString: creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,6 +220,7 @@ MonoBehaviour:
   keepStandingUp: 1
   useGravity: 1
   gravity: {fileID: 0}
+  standUpForce: 20
 --- !u!135 &13564986
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -238,7 +239,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: creature
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181638}
