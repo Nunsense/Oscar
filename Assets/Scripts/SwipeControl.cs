@@ -10,6 +10,7 @@ public class SwipeControl : MonoBehaviour {
  
 	private float startTime;
 	private Vector2 startPos;
+	private Vector2 endPos;
 	private bool couldBeSwipe;
 
 	private Vector2 swipeVector;
@@ -92,7 +93,6 @@ public class SwipeControl : MonoBehaviour {
 					swipeVector = currentVector;
 					                       
 					lastSwipeTime = Time.time;
-//					Debug.Log("Swipe");
 				} else {
 					swipeVector = Vector2.zero;
 				}
@@ -103,6 +103,14 @@ public class SwipeControl : MonoBehaviour {
 
 	public Vector2 SwipeVector() {
 		return swipeVector;
+	}
+
+	public float SwipeAngle() {
+		return Vector2.Angle(startPos, swipeVector);
+	}
+
+	public bool HasSwipe() {
+		return swipeVector != Vector2.zero;
 	}
 
 	public void Reset() {

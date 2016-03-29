@@ -12,6 +12,7 @@ public class GravityBody : MonoBehaviour {
 
 	public GravityGenerator gravity;
 	protected Rigidbody body;
+	public float standUpForce = 20f;
 
 	Vector3 gravityUp;
 
@@ -36,7 +37,7 @@ public class GravityBody : MonoBehaviour {
 			gravityUp = (trans.position - gravity.transform.position) + trans.position;
 
 			Quaternion rot = Quaternion.FromToRotation(trans.up, gravityUp) * trans.rotation;
-			trans.rotation = Quaternion.Slerp(trans.rotation, rot, body.mass * Time.deltaTime);
+			trans.rotation = Quaternion.Slerp(trans.rotation, rot, standUpForce * Time.deltaTime);
 		}
 
 		normal = trans.position - gravity.transform.position;
