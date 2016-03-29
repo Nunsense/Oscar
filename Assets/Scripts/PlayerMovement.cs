@@ -9,6 +9,7 @@ public class PlayerMovement : GravityBody {
 	public BallMovement ballMovement;
 
 	private Vector3 move;
+	private Vector3 torque;
 
 	bool isMoving = false;
 
@@ -22,7 +23,8 @@ public class PlayerMovement : GravityBody {
 
 		Vector2 swipe = swipeControl.SwipeVector();
 		if (swipe != Vector2.zero) {
-			move = (-swipe.x * trans.forward + swipe.y * trans.right).normalized;
+			move = (swipe.y * trans.forward + swipe.x * trans.right);
+			torque = (-swipe.x * trans.forward + swipe.y * trans.right);
 			isMoving = true;
 			Debug.DrawRay(ball.position, move * 10, Color.yellow, 5f);
 
@@ -43,6 +45,6 @@ public class PlayerMovement : GravityBody {
 
 	void FixedUpdate() {
 		if (isMoving)
-			ballMovement.Move(move);
+			ballMovement.Move(-move, -torque);
 	}
 }
