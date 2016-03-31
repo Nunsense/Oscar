@@ -28,8 +28,6 @@ public class SwipeControl : MonoBehaviour {
 		Ended
 	}
 
-	private float lastSwipeTime;
-
 	void Update() {
 		MouseUpdate();
 	}
@@ -70,7 +68,6 @@ public class SwipeControl : MonoBehaviour {
 	void Swipe(Vector2 pos, SwipeState state) {
 		switch (state) {
 		case SwipeState.Began:
-			lastSwipeTime = 0;
 			couldBeSwipe = true;
 			startPos = pos;
 			startTime = Time.time;
@@ -88,11 +85,10 @@ public class SwipeControl : MonoBehaviour {
 				float swipeTime = Time.time - startTime;
 				Vector2 currentVector = pos - startPos;
 				float swipeDist = currentVector.magnitude;
+				Debug.Log(swipeDist);
                    
 				if (swipeTime < maxSwipeTime && swipeDist > minSwipeDist) {
 					swipeVector = currentVector;
-					                       
-					lastSwipeTime = Time.time;
 				} else {
 					swipeVector = Vector2.zero;
 				}

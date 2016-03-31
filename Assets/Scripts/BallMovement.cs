@@ -8,6 +8,8 @@ public class BallMovement : GravityBody {
 
 	[SerializeField] private float m_BreakPower = 0.8f;
 
+	[SerializeField] private float m_MoveFactor = 0.2f;
+
 	void Awake() {
 		Init();
 	}
@@ -21,10 +23,14 @@ public class BallMovement : GravityBody {
 	}
 
 	public void Move(Vector3 move, Vector3 torque) {
-		Debug.DrawRay(transform.position, move.normalized * 2f, Color.green);
+		Debug.DrawRay(transform.position, move.normalized, Color.green);
 		body.angularVelocity *= m_BreakPower;
 		body.angularVelocity += torque * m_MovePower;
 
-		body.AddForce(move.normalized * m_MovePower);
+		body.AddForce(move * m_MoveFactor * m_MovePower);
+	}
+
+	public float Velocity() {
+		return body.velocity.magnitude;
 	}
 }
