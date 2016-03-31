@@ -85,7 +85,6 @@ public class SwipeControl : MonoBehaviour {
 				float swipeTime = Time.time - startTime;
 				Vector2 currentVector = pos - startPos;
 				float swipeDist = currentVector.magnitude;
-				Debug.Log(swipeDist);
                    
 				if (swipeTime < maxSwipeTime && swipeDist > minSwipeDist) {
 					swipeVector = currentVector;

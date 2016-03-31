@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class CameraMovement : GravityBody {
-	bool isMoving = false;
 	public Transform ball;
+
+	public float speed = 20f;
 
 	void Awake() {
 		Init();
@@ -11,6 +12,6 @@ public class CameraMovement : GravityBody {
 
 	void Update() {
 		UpdateGravityPhisics();
-		trans.position = ball.position;
+		trans.position = Vector3.Lerp(trans.position, ball.position, speed * Time.deltaTime);
 	}
 }

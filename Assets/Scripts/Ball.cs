@@ -5,33 +5,34 @@ using UnityEngine.UI;
 public class Ball : MonoBehaviour {
 
 	public ParticleSystem creatureParticles;
-	public Text scoreText;
-	public Text oxigenText;
-	public Image oxigenImage;
-	public Text speedText;
-	public Image speedImage;
-
+	public UIManager ui;
 	private BallMovement movement;
-
-	float maxImageSize = 400f;
 
 	float oxigen = 100;
 	float speed = 0;
 	int score = 0;
 
+	public float oxigenConsumption = 0.4f;
+	public bool isPlaying;
+
 	void Awake() {
 		movement = GetComponent<BallMovement>();
+		isPlaying = false;
 	}
 
 	void Update() {
-		speed = movement.Velocity();
-		oxigen -= (0.2f + 0.01f * (60f / speed)) * Time.deltaTime;
+		if (isPlaying) {
+			speed = movement.Velocity();
+			oxigen -= (oxigenConsumption + oxigenConsumption * (60f / speed)) * Time.deltaTime;
 
-		SetImageSize(oxigenImage, oxigen * maxImageSize);
-		oxigenText.text = Mathf.Round(oxigen) + "%";
+			ui.ShowInGameOxigen(oxigen);
+			ui.ShowInGameSpeed(speed);
 
-		SetImageSize(speedImage, speed * maxImageSize);
-		speedText.text = Mathf.Round(speed) + "%";
+			if (oxigen <= 0) {
+				isPlaying = false;
+				ui.EndGame(score);		
+			}
+		}
 	}
 
 	void OnCollisionEnter(Collision col) {
@@ -42,14 +43,15 @@ public class Ball : MonoBehaviour {
 			col.transform.position = -col.transform.position;
 			col.collider.enabled = true;
 			score++;
-			scoreText.text = score.ToString();
+			ui.ShowInGameScore(score);
 		}
 	}
 
-	void SetImageSize(Image img, float perc) {
-		RectTransform rec = img.rectTransform;
-		Vector2 size = rec.sizeDelta;
-		size.y = perc / 100;
-		rec.sizeDelta = size;
+	public void Reset() {
+		oxigen = 100;
+		score = 0;
+		speed = 0;
+		isPlaying = true;
+		ui.ShowInGameScore(score);
 	}
 }

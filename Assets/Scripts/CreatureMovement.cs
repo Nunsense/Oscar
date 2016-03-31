@@ -7,7 +7,7 @@ public class CreatureMovement : GravityBody {
 	}
 
 	void Start() {
-		trans.localPosition = Random.insideUnitSphere * 0.7f;
+		trans.localPosition = Random.insideUnitSphere * 0.8f;
 	}
 
 	void Update() {
