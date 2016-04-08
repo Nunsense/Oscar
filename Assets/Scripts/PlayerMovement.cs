@@ -36,6 +36,10 @@ public class PlayerMovement : GravityBody {
 			} else {
 				isMoving = false;
 			}
+		} else if (ball.isWaitingForInput) {
+			if (swipeControl.HasSwipe()) {
+				ball.StartMoving();
+			}
 		}
 
 		trans.position = ballTransform.position;
@@ -45,7 +49,7 @@ public class PlayerMovement : GravityBody {
 
 
 	void FixedUpdate() {
-		if (isMoving)
+		if (ball.isPlaying && isMoving)
 			ballMovement.Move(-move, -torque);
 	}
 }

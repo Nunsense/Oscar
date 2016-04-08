@@ -6,12 +6,13 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: trunk
+  m_Name: tree_mat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _ALPHATEST_ON
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -90,7 +91,7 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: 0.5
+        second: 0
       data:
         first:
           name: _Parallax
@@ -102,7 +103,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.5
+        second: 0
       data:
         first:
           name: _BumpScale
@@ -122,7 +123,7 @@ Material:
       data:
         first:
           name: _Mode
-        second: 0
+        second: 1
       data:
         first:
           name: _Metallic
@@ -135,4 +136,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.0871, g: 0.0379, b: 0.0117, a: 1}
+        second: {r: 0.19852942, g: 0.11436583, b: 0.037954155, a: 1}

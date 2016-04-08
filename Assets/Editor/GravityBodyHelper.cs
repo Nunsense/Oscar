@@ -141,6 +141,13 @@ public class GravityBodyHelper : Editor {
 
 			Quaternion rot = Quaternion.FromToRotation(bodyUp, gravityUp) * body.transform.rotation;
 			body.transform.rotation = Quaternion.Slerp(body.transform.rotation, rot, 20f * Time.deltaTime);
+
+			Ray ray = new Ray(body.transform.position, -bodyUp);
+ 
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit)) {
+				body.transform.position = hit.point; 
+			}
 		}
 	}
 }

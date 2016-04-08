@@ -16,6 +16,8 @@ public class BallMovement : GravityBody {
 
 	private void Start() {
 		GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
+		body.velocity = Vector3.zero;
+		body.angularVelocity = Vector3.zero;
 	}
 
 	void FixedUpdate() {
@@ -31,6 +33,6 @@ public class BallMovement : GravityBody {
 	}
 
 	public float Velocity() {
-		return body.velocity.magnitude;
+		return Mathf.Clamp(body.velocity.magnitude, -m_MaxAngularVelocity, m_MaxAngularVelocity);
 	}
 }

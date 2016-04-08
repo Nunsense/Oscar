@@ -14,16 +14,18 @@ public class Ball : MonoBehaviour {
 
 	public float oxigenConsumption = 0.4f;
 	public bool isPlaying;
+	public bool isWaitingForInput;
 
 	void Awake() {
 		movement = GetComponent<BallMovement>();
 		isPlaying = false;
+		isWaitingForInput = true;
 	}
 
 	void Update() {
 		if (isPlaying) {
 			speed = movement.Velocity();
-			oxigen -= (oxigenConsumption + oxigenConsumption * (60f / speed)) * Time.deltaTime;
+			oxigen -= (oxigenConsumption + Mathf.Max(0, 10 - speed)) * Time.deltaTime;
 
 			ui.ShowInGameOxigen(oxigen);
 			ui.ShowInGameSpeed(speed);
@@ -51,7 +53,15 @@ public class Ball : MonoBehaviour {
 		oxigen = 100;
 		score = 0;
 		speed = 0;
-		isPlaying = true;
 		ui.ShowInGameScore(score);
+		ui.ShowInGameOxigen(oxigen);
+		ui.ShowInGameSpeed(speed);
+		isPlaying = false;
+		isWaitingForInput = true;
+	}
+
+	public void StartMoving() {
+		isWaitingForInput = false;
+		isPlaying = true;
 	}
 }
