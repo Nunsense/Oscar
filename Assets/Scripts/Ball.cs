@@ -22,6 +22,7 @@ public class Ball : MonoBehaviour {
 		isWaitingForInput = true;
 	}
 
+
 	void Update() {
 		if (isPlaying) {
 			speed = movement.Velocity();

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : GravityBody {
 	public Camera cam;
-	private SwipeControl swipeControl;
+	private BallControl swipeControl;
 
 	public Ball ball;
 	Transform ballTransform;
@@ -16,7 +16,7 @@ public class PlayerMovement : GravityBody {
 
 	void Awake() {
 		Init();
-		swipeControl = GetComponent<SwipeControl>();
+		swipeControl = GetComponent<BallControl>();
 		ballTransform = ball.transform;
 		ballMovement = ball.GetComponent<BallMovement>();
 	}
@@ -30,7 +30,7 @@ public class PlayerMovement : GravityBody {
 				move = (swipe.y * trans.forward + swipe.x * trans.right);
 				torque = (-swipe.x * trans.forward + swipe.y * trans.right);
 				isMoving = true;
-				Debug.DrawRay(ballTransform.position, move * 10, Color.yellow, 5f);
+				Debug.DrawRay(ballTransform.position, move * 2, Color.yellow, 1f);
 
 				swipeControl.Reset();
 			} else {
